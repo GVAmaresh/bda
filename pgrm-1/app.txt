@@ -1,0 +1,51 @@
+a) To create a new file 
+vi a.txt
+
+b) To exit the file 
+:wq + Enter
+
+startCDH
+
+a) Adding Files and directories
+--- Creating a Directory
+hdfs dfs -mkdir /user/hadoop/mydirectory
+
+--- Adding Files to HDFS
+hdfs dfs -put a.txt /user/hadoop/mydirectory
+
+--- Upload a directory to HDFS
+hdfs dfs -put newFolder /user/hadoop/mydirectory    
+
+b) Retrive Files
+hdfs dfs -get /user/hadoop/mydirectory/a.txt /Desktop
+
+c) Deleting Files
+--- Delete File
+hdfs dfs -rm /user/hadoop/mydirectory/a.txt
+ 
+--- Delete Path Directory
+hdfs dfs -rm -r /user/hadoop/mydirectory
+
+d) Create new file in Hadoop Environment
+touch ab.txt
+
+hdfs dfs -put ab.txt /user/hadoop/mydirectory/abc.txt
+
+e) List files in HDFS.
+hdfs dfs -ls /user/hadoop/mydirectory
+
+f) Operatoin on Files
+--- Upload Files
+hdfs dfs -put a.txt /user/hadoop/mydirectory
+
+--- Download File
+hdfs dfs -get /user/hadoop/mydirectory/a.txt /Downloads
+
+--- Copy File
+hdfs dfs -cp /user/hadoop/mydirectory/a.txt /Downloads
+
+--- Move File
+hdfs dfs -mv /user/hadoop/mydirectory/a.txt /Downloads
+
+--- Remove File
+hdfs dfs -rm /user/hadoop/mydirectory/a.txt

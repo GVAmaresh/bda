@@ -1,0 +1,61 @@
+5. Perform targeted data analysis using Apache Hive on the provided dataset, 
+  a) To find the movie with the highest average rating.         
+  b) Identify the most active users based on the number of ratings submitted.    
+  c) Discover movies with the highest number of positive ratings. 
+  d) Find the top genres ranked by their average rating. 
+------------------------------------------------------------------------------------
+
+
+startCDH
+hadoop fs -ls /user/hive
+hive
+
+------------------------------------------------------------------------------------
+
+create table if not exists movies(
+    movieid int,
+    title string,
+    genres string,
+)
+row format delimited
+fields terminated by ",";
+
+load data local inpath 'movies.csv' into table movies;
+
+create table if not exists ratings(
+    userid string,
+    movieid string,
+    rating string,
+    `timestamp` string )
+row format delimited
+fields terminated by ",";
+
+load data local inpath 'ratings.csv' into table ratings;
+
+------------------------------------------------------------------------------------
+a) To find the movie with the highest average rating. 
+
+select movie_id, avg(rating) as avg_rating
+from ratings
+group by movie_id
+order by avg_rating
+limit 1;
+
+------------------------------------------------------------------------------------
+b) Identify the most active users based on the number of ratings submitted.    
+
+select user_id, count(*) as num_rating
+from ratings
+group by user_id
+order by num_rating desc
+limit 10;
+
+-------------------------------------------------------------------------------------
+c) Discover movies with the highest number of positive ratings.
+
+select movie_id, count(*) as positive_rating
+from ratings
+where rating >=4
+group by movie_id
+order by positive_rating desc
+limit 10;
